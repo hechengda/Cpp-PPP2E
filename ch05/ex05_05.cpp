@@ -1,0 +1,29 @@
+#include "std_lib_facilities.h"
+
+// converts Celsius to Kelvin
+double ctok(double c)
+{
+    if (c<-273.15) {
+        error("lower than 0K");
+    }
+    return c + 273.15;
+}
+
+// converts Kelvin to Celsius
+double ktoc(double k)
+{
+    if (k<0) {
+        error("lower than 0K");
+    }
+    return k - 273.15;
+}
+
+int main()
+{
+    double c = 0;   // declare input variable
+    cin>>c;   // retrieve temperature to input variable
+    double k = ctok(c);   // convert temperature
+    cout<<k<<'\n';  // print out temperature
+
+    return 0;
+}
