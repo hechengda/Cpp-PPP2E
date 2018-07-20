@@ -4,20 +4,19 @@
 #include "std_lib_facilities.h"
 
 int main()
-{
-    try {
-        for (int val = 0; cout<<"Please enter an integer: ", cin>>val;) {
-            string res = "even";
-            if (val%2) {    // a number is even if it is 0 modulo 2 and odd otherwise
-                res = "odd";
-            }
-            cout << "The value " << val << " is an " << res << " number\n";
+try {
+    for (int val = 0; cout<<"Please enter an integer: ", cin>>val;) {
+        string res = "even";
+        if (val%2) {    // a number is even if it is 0 modulo 2 and odd otherwise
+            res = "odd";
         }
-    }
-    catch (runtime_error e) {   // this code is to produceerror messages; it will be described in Chapter 5
-        cout << e.what() << '\n';
+        cout<<"The value "<<val<<" is an "<<res<<" number\n";
     }
     return 0;
+}
+catch (runtime_error e) {   // this code is to produceerror messages; it will be described in Chapter 5
+    cout<<e.what()<<'\n';
+    return 1;
 }
 
 /*

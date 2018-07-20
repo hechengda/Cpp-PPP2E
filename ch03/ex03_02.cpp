@@ -1,5 +1,8 @@
+// Solution for Chapter 3 Exercise 2
+
 #include "std_lib_facilities.h"
 
+// Convert miles to kilometers
 int main()
 {
     cout<<"Enter a number of miles: ";

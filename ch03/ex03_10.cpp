@@ -4,39 +4,38 @@
 #include "std_lib_facilities.h"
 
 int main()
-{
-    try {
-        for (string operation, double val1, val2;
-            cout<<"Please enter an operation (+, -, *, /, plus, minus, mul, div) followed by two floating-point values separated by a space: ",
-            cin>>operation>>val1>>val2;) {  // we do the following as long as we get "good" input
-            // and then stop loops will be explainied in detail in Chapter 4
-            double res = 0.0;
-            if (operation=="plus" || operation=="+") {
-                res = val1+val2;
-            }
-            else if (operation=="minus" || operation=="-") {
-                res = val1-val2;
-            }
-            else if (operation=="mul" || operation=="*") {
-                res = val1*val2;
-            }
-            else if (operation=="div" || operation=="/") {
-                if (val2==0.0) {
-                    error("trying to divide by zero");
-                }
-                res = val1/val2;
-            }
-            else {
-                error("sorry: bad operator: ", operation);
-            }
-            cout << val1 << operation << val2 << " == " << res <<'\n';
+try {
+    for (string operation, double val1, val2;
+        cout<<"Please enter an operation (+, -, *, /, plus, minus, mul, div) followed by two floating-point values separated by a space: ",
+        cin>>operation>>val1>>val2;) {  // we do the following as long as we get "good" input
+        // and then stop loops will be explainied in detail in Chapter 4
+        double res = 0.0;
+        if (operation=="plus" || operation=="+") {
+            res = val1+val2;
         }
-        cout << "exit because of bad input\n";
+        else if (operation=="minus" || operation=="-") {
+            res = val1-val2;
+        }
+        else if (operation=="mul" || operation=="*") {
+            res = val1*val2;
+        }
+        else if (operation=="div" || operation=="/") {
+            if (val2==0.0) {
+                error("trying to divide by zero");
+            }
+            res = val1/val2;
+        }
+        else {
+            error("sorry: bad operator: ", operation);
+        }
+        cout<<val1<<operation<<val2<<" == "<<res <<'\n';
     }
-    catch (runtime_error e) {   // this code is to produceerror messages; it will be described in Chapter 5
-        cout << e.what() << '\n';
-    }
+    cout<<"exit because of bad input\n";
     return 0;
+}
+catch (runtime_error e) {   // this code is to produceerror messages; it will be described in Chapter 5
+    cout<<e.what()<<'\n';
+    return 1;
 }
 
 /*
