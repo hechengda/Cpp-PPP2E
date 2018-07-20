@@ -5,16 +5,16 @@ int main()
     cout<<"Enter the name of the person you want to write to\n";
     string first_name;
     cin>>first_name;
-    cout<<"\nDear "<<first_name;
+    cout<<"\nDear "<<first_name<<',';
 
-    cout<<"\n  How are you? I am fine. I miss you.\n";
+    cout<<"\n\tHow are you? I am fine. I miss you.\n";
     cout<<"\nEnter the name of another friend\n";
     string friend_name;
     cin>>friend_name;
     cout<<"\nHave you seen "<<friend_name<<" lately?\n";
 
     cout<<"\nTo enter an m if the friend is male and an f if the friend is female\n";
-    char friend_sex = 0;
+    char friend_sex {0};
     cin>>friend_sex;
     if (friend_sex=='m') {
         cout<<"\nIf you see "<<friend_name<<" please ask him to call me.\n";
