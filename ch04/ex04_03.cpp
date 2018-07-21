@@ -29,38 +29,38 @@ void print_dist()
 }
 
 int main()
-{
-    try {
-        cout << "please enter a whitespace-separated sequence of doubles (representing distances) : ";
+try {
+    cout << "please enter a whitespace-separated sequence of doubles (representing distances) : ";
 
-        for (double val; cin>>val;) { // read distance
-            if (val<=0) {
-                print_dist();
-                return 0;
-            }
-            dist.push_back(val);  // store the value
-
-            // update the "running" values:
-            sum += val;
-
-            if (val<smallest) {
-                smallest = val;
-            }
-            if (val>greatest) {
-                greatest = val;
-            }
+    for (double val; cin>>val;) { // read distance
+        if (val<=0) {
+            print_dist();
+            return 0;
         }
-        print_dist();
-    }
-    catch (runtime_error e) {   // this code is to produce error messages; it will be described in Chapter 5
-        cout<<e.what()<<'\n';
-    }
-    catch (...) {   // this code is to produce error messages; it will be described in Chapter 5
-        cout<<"exiting\n";
-    }
+        dist.push_back(val);  // store the value
 
+        // update the "running" values:
+        sum += val;
+
+        if (val<smallest) {
+            smallest = val;
+        }
+        if (val>greatest) {
+            greatest = val;
+        }
+    }
+    print_dist();
     return 0;
 }
+catch (runtime_error e) {   // this code is to produce error messages; it will be described in Chapter 5
+    cout<<e.what()<<'\n';
+    return 1;
+}
+catch (...) {   // this code is to produce error messages; it will be described in Chapter 5
+    cout<<"exiting\n";
+    return 2;
+}
+
 
 /*
 Note the test for "no distances entered". Forgetting the case of "no input" is a common error.

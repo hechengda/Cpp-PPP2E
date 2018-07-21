@@ -11,34 +11,31 @@ output the pairs
 */
 
 int main()
-{
-    try {
-        vector<string> names;
-        vector<int> scores;
-        string s;
-        int val;
+try {
+    vector<string> names;
+    vector<int> scores;
+    string s;
+    int val;
 
-        while (cin>>s>>val && s!="NoName") {    // read string int pair
-            int i = 0;
-
-            for (; i!=names.size(); ++i) {
-                if (names[i]==s) {   // chek for duplicate
-                    error("duplicate", s);
-                }
+    while (cin>>s>>val && s!="NoName") {    // read string int pair
+        for (int i = 0; i!=names.size(); ++i) {
+            if (names[i]==s) {   // chek for duplicate
+                error("duplicate", s);
             }
-            names.push_back(s);   // insert new one
-            scores.push_back(val);
-            cout<<"("<<s<<", "<<val<<")\n";
         }
+        names.push_back(s);   // insert new one
+        scores.push_back(val);
+        cout<<"("<<s<<", "<<val<<")\n";
     }
-    catch (runtime_error e) {   // this code is to produce error messages; it will be described in Chapter 5
-        cout<<e.what()<<'\n';
-    }
-    catch (...) {   // this code is to produce error messages; it will be described in Chapter 5
-        cout<<"exiting\n";
-    }
-
     return 0;
+}
+catch (runtime_error e) {   // this code is to produce error messages; it will be described in Chapter 5
+    cout<<e.what()<<'\n';
+    return 1;
+}
+catch (...) {   // this code is to produce error messages; it will be described in Chapter 5
+    cout<<"exiting\n";
+    return 2;
 }
 
 /*

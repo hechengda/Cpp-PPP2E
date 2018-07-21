@@ -9,18 +9,17 @@
 // How do you exit?
 
 int main()
-{
-    try {
-        cout<<"please enter two floating-point values separated by an operator\nThe operator can be + - * or / : ";
-        double val1;
-        double val2;
-        char op;
+try {
+    cout<<"please enter two floating-point values separated by an operator\nThe operator can be + - * or / : ";
+    double val1;
+    double val2;
+    char op;
 
-        while (cin>>val1>>op>>val2) { // read number operation number
-            string oper;
-            double result;
+    while (cin>>val1>>op>>val2) { // read number operation number
+        string oper;
+        double result;
 
-            switch (op) {
+        switch (op) {
             case '+':
                 oper = "sum of ";
                 result = val1+val2;
@@ -43,17 +42,17 @@ int main()
             default:
                 error("bad operator");
                 break;
-            }
-            cout<<oper<<val1<<" and "<<val2<<" is "<<result<<'\n';
-            cout<<"Try again: ";
         }
+        cout<<oper<<val1<<" and "<<val2<<" is "<<result<<'\n';
+        cout<<"Try again: ";
     }
-    catch (runtime_error e) {   // this code is to produce error messages; it will be described in Chapter 5
-        cout<<e.what()<<'\n';
-    }
-    catch (...) {   // this code is to produce error messages; it will be described in Chapter 5
-        cout<<"exiting\n";
-    }
-
     return 0;
+}
+catch (runtime_error e) {   // this code is to produce error messages; it will be described in Chapter 5
+    cout<<e.what()<<'\n';
+    return 1;
+}
+catch (...) {   // this code is to produce error messages; it will be described in Chapter 5
+    cout<<"exiting\n";
+    return 2;
 }

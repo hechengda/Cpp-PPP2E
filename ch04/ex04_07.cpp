@@ -47,15 +47,14 @@ Solutions that do not use this technique can get very complicated.
 int get_number()
 {
     int val;
-
     if (cin>>val) { // try to read an integer
         return val;
     }
     cin.clear();    // clear string after failed attempt to read an integer
     string s;
     cin>>s;
-    int i = 0;
 
+    int i = 0;
     for (; i != numbers.size(); ++i) {  // see if the string is in numbers
         if (s==numbers[i]) {    // found the target
             val = i;
@@ -69,20 +68,19 @@ int get_number()
 }
 
 int main()
-{
-    try {
-        initialize_numbers();
-        cout<< "please enter two floating-point values separated by an operator\nThe operator can be + - * or / : ";
+try {
+    initialize_numbers();
+    cout<< "please enter two floating-point values separated by an operator\nThe operator can be + - * or / : ";
 
-        while (true) { // "forever"; that is until we give an unacceptable input or make a computations error
-            int val1 = get_number();
-            char op;
-            cin>>op;    // get the operator
-            int val2 = get_number();
-            string oper;    // text appropriate for an operator
-            double result;
+    while (true) { // "forever"; that is until we give an unacceptable input or make a computations error
+        int val1 = get_number();
+        char op;
+        cin>>op;    // get the operator
+        int val2 = get_number();
+        string oper;    // text appropriate for an operator
+        double result;
 
-            switch (op) {
+        switch (op) {
             case '+':
                 oper = "sum of ";
                 result = val1+val2;
@@ -105,17 +103,17 @@ int main()
             default:
                 error("bad operator", op);
                 break;
-            }
-            cout << oper << val1 << " and " << val2 << " is " << result << '\n';
-            cout << "Try again: ";
         }
+        cout << oper << val1 << " and " << val2 << " is " << result << '\n';
+        cout << "Try again: ";
     }
-    catch (runtime_error e) {   // this code is to produce error messages; it will be described in Chapter 5
-        cout<<e.what()<<'\n';
-    }
-    catch (...) {   // this code is to produce error messages; it will be described in Chapter 5
-        cout<<"exiting\n";
-    }
-
     return 0;
+}
+catch (runtime_error e) {   // this code is to produce error messages; it will be described in Chapter 5
+    cout<<e.what()<<'\n';
+    return 1;
+}
+catch (...) {   // this code is to produce error messages; it will be described in Chapter 5
+    cout<<"exiting\n";
+    return 2;
 }

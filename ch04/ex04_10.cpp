@@ -22,8 +22,7 @@ int v2 = 2;
 int fib()
 {
     int s = v1+v2;
-
-    if (s<=0) {
+    if (s<=0) {     // maybe overflow
         s = 1;
     }
     v1 = v2;
@@ -54,45 +53,44 @@ int next_play()
 }
 
 int main()
-{
-    try {
-        cout << "enter an integer \"seed\" to help me play: ";
-        int seed = 0;
-        cin>>seed;
-        generate(seed); // get the computer ready to play
+try {
+    cout << "enter an integer \"seed\" to help me play: ";
+    int seed = 0;
+    cin>>seed;
+    generate(seed); // get the computer ready to play
 
-        // let's keep track of who's winning:
-        int usr_score = 0; // user's score
-        int cpt_score = 0; // computer's score
-        int draws = 0;  // number of draws/ties
-        cout<<"enter \"rock\", \"paper\", or \"scissors\"\n"
-            <<"(I'll do the same and promises not to cheat by peeping at your input): ";
+    // let's keep track of who's winning:
+    int usr_score = 0; // user's score
+    int cpt_score = 0; // computer's score
+    int draws = 0;  // number of draws/ties
+    cout<<"enter \"rock\", \"paper\", or \"scissors\"\n"
+        <<"(I'll do the same and promises not to cheat by peeping at your input): ";
 
-        // we'll as long as we get "good" input and then stop
-        // the computer prefers numbers, so convert string representations to numbers
-        // we prefer strings (except when wet ype), so convert abbreviations to full words
-        for (string su; cin>>su;) {
-            int iu = 0;
+    // we'll as long as we get "good" input and then stop
+    // the computer prefers numbers, so convert string representations to numbers
+    // we prefer strings (except when wet ype), so convert abbreviations to full words
+    for (string su; cin>>su;) {
+        int iu = 0;
 
-            if (su=="scissors" || su=="s") {
-                iu = 0;
-                su = "scissors";
-            }
-            else if (su=="rock" || su=="r") {
-                iu = 1;
-                su = "rock";
-            }
-            else if (su=="paper" || su=="p") {
-                iu = 2;
-                su = "paper";
-            }
-            else {
-                error("sorry: bad operator: ", su);
-            }
-            int ic = next_play();
-            string sc;  // computers play
+        if (su=="scissors" || su=="s") {
+            iu = 0;
+            su = "scissors";
+        }
+        else if (su=="rock" || su=="r") {
+            iu = 1;
+            su = "rock";
+        }
+        else if (su=="paper" || su=="p") {
+            iu = 2;
+            su = "paper";
+        }
+        else {
+            error("sorry: bad operator: ", su);
+        }
+        int ic = next_play();
+        string sc;  // computers play
 
-            switch (ic) {    // we prefer strings, so convert numeric representations to strings
+        switch (ic) {    // we prefer strings, so convert numeric representations to strings
             case 0:
                 sc = "scissors";
                 break;
@@ -104,36 +102,36 @@ int main()
                 break;
             default:
                 break;
-            }
-            if (iu==ic) {
-                cout << "a draw!\n";
-                ++draws;
+        }
+        if (iu==ic) {
+            cout << "a draw!\n";
+            ++draws;
+        }
+        else {
+            string res = "I win!";
+
+            if (ic==0 && iu==1  // rock beats sissors
+                || ic==1 && iu==2   // paper beats rock
+                || ic==2 && iu==0) {    // scissors beat paper
+                res = "You win!";
+                ++usr_score;
             }
             else {
-                string res = "I win!";
-
-                if (ic==0 && iu==1  // rock beats sissors
-                    || ic==1 && iu==2   // paper beats rock
-                    || ic==2 && iu==0) {    // scissors beat paper
-                    res = "You win!";
-                    ++usr_score;
-                }
-                else {
-                    ++cpt_score;
-                }
-                cout<<"you said \""<<su<<"\" I said \""<<sc<<"\": "<<res;
-                cout<<" score: you=="<<usr_score<<" me=="<<cpt_score<<" same=="<<draws<<'\n';
+                ++cpt_score;
             }
-            cout<<"Please try again: ";
+            cout<<"you said \""<<su<<"\" I said \""<<sc<<"\": "<<res;
+            cout<<" score: you=="<<usr_score<<" me=="<<cpt_score<<" same=="<<draws<<'\n';
         }
-        cout<<"exit because of bad input\n";
+        cout<<"Please try again: ";
     }
-    catch (runtime_error e) {   // this code is to produce error messages; it will be described in Chapter 5
-        cout<<e.what()<<'\n';
-    }
-
+    cout<<"exit because of bad input\n";
     return 0;
 }
+catch (runtime_error e) {   // this code is to produce error messages; it will be described in Chapter 5
+    cout<<e.what()<<'\n';
+    return 1;
+}
+
 
 /*
 Did you have trouble remembering that

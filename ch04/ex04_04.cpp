@@ -1,5 +1,6 @@
 #include "std_lib_facilities.h"
 
+// Using binary search
 int main()
 {
     int lower = 1;  // lower boundary
