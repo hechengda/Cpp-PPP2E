@@ -1,3 +1,5 @@
+// Chapter 6 Excercise 2 & 3
+
 #include "std_lib_facilities.h"
 
 constexpr char digit = '0';
@@ -73,7 +75,7 @@ Token Token_stream::get()
     case ';':   // for "print"
     case 'q':   // for "quit"
     case '!':   // for "factorial"
-    case '(': case ')':
+    case '{': case '}': case '(': case ')':
     case '+': case '-': case '*': case '/':
         return Token{c,0.0};   // let each character represent itself
     case '.':
@@ -101,43 +103,34 @@ void Token_stream::putback(Token t)
 
 double primary()
 {
+    double d = 0.0;
     Token t = ts.get();
 
     switch (t.first) {
+    case '{':   // handle ¡®{¡® expression ¡®}¡¯
+        d = expression();
+        t = ts.get();
+        if (t.first!='}') error("'}' expected");
+        break;
     case '(':   // handle ¡®(¡® expression ¡®)¡¯
-    {
-        double d = expression();
+        d = expression();
         t = ts.get();
-
-        if (t.first!=')') {
-            error("')' expected");
-        }
-        t = ts.get();
-
-        if (t.first=='!') { // handle factorial '!'
-            return factorial(int(d));
-        }
-        else {
-            ts.putback(t);  // put t back into the token stream
-            return d;
-        }
-    }
+        if (t.first!=')') error("'}' expected");
+        break;
     case digit:
-    {
-        double d = t.second;
-        t = ts.get();
-
-        if (t.first=='!') { // handle factorial '!'
-            return factorial(int(d));
-        }
-        else {
-            ts.putback(t);  // put t back into the token stream
-            return d;    // return the number¡¯s value
-        }
-    }
+        d = t.second;
+        break;
     default:
         error("primary expected");
     }
+
+    // check if we have the case Primary "!" (a factorial)
+    t = ts.get();
+    if (t.first=='!') { // handle factorial '!'
+        return factorial(int(d));
+    }
+    ts.putback(t);  // put t back into the token stream
+    return d;
 }
 
 double term()
@@ -199,10 +192,10 @@ int factorial(int n)
     else if (!n) {
         return 1;
     }
+    
     int prev = 1;
     int curr = 1;
     int i = 0;
-    
     while (i<n) {
         curr = prev*++i;
         prev = curr;
